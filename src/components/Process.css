@@ -1,0 +1,172 @@
+/* ===== Process Section ===== */
+.process {
+  background-color: var(--color-bg);
+}
+
+.process__split {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  position: relative;
+}
+
+/* ===== Left Column - Sticky Info ===== */
+.process__left-col {
+  position: sticky;
+  top: 140px;
+  align-self: start;
+  text-align: left;
+}
+
+.process__left-desc {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  margin-top: 16px;
+  max-width: 420px;
+}
+
+.process__left-indicator {
+  width: 40px;
+  height: 2px;
+  background-color: var(--color-primary);
+  margin-top: 32px;
+  box-shadow: 0 0 10px rgba(0, 223, 137, 0.5);
+}
+
+/* ===== Right Column - Vertical Timeline ===== */
+.process__right-col {
+  position: relative;
+  padding-left: 48px;
+}
+
+/* Vertical Timeline Track */
+.process__connector-line {
+  position: absolute;
+  left: 20px;
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  background: linear-gradient(180deg, 
+    var(--color-primary) 0%, 
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
+}
+
+.process__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.process__step {
+  position: relative;
+  text-align: left;
+  transition: transform var(--transition-medium);
+}
+
+.process__step-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+/* Timeline Indicators */
+.process__step-number {
+  position: absolute;
+  left: -48px;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-primary);
+  opacity: 0.8;
+  line-height: 1;
+  top: 13px;
+}
+
+.process__step-icon {
+  position: absolute;
+  left: -48px;
+  margin-left: 20px; /* shift to center on line */
+  transform: translateX(-50%);
+  top: 5px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #030303;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: all var(--transition-medium);
+}
+
+.process__step:hover .process__step-icon {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: 0 0 15px rgba(0, 223, 137, 0.3);
+  transform: translateX(-50%) scale(1.1);
+}
+
+.process__step-title {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.5px;
+}
+
+.process__step-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .process__split {
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .process__split {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+
+  .process__left-col {
+    position: relative;
+    top: 0;
+  }
+
+  .process__left-indicator {
+    display: none;
+  }
+
+  .process__right-col {
+    padding-left: 36px;
+  }
+
+  .process__connector-line {
+    left: 10px;
+  }
+
+  .process__step-number {
+    left: -36px;
+    font-size: 12px;
+    top: 8px;
+  }
+
+  .process__step-icon {
+    left: -36px;
+    margin-left: 10px;
+    top: 0;
+  }
+}

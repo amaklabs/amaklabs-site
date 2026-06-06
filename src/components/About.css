@@ -1,0 +1,137 @@
+/* ===== About Section ===== */
+.about {
+  background-color: var(--color-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.about__header {
+  text-align: left;
+  max-width: var(--container-width);
+  margin: 0 auto 64px;
+  padding: var(--container-padding);
+}
+
+.about__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 80px;
+  align-items: start;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: var(--container-padding);
+}
+
+/* Left column – mission text */
+.about__mission {
+  text-align: left;
+}
+
+.about__mission p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--color-text-muted);
+}
+
+.about__mission p + p {
+  margin-top: 24px;
+}
+
+/* Right column – team cards */
+.about__team {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.about__member-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 24px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  transition: border-color var(--transition-medium), box-shadow var(--transition-medium), transform var(--transition-medium);
+  text-align: left;
+}
+
+.about__member-card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: var(--glow-green);
+  transform: translateY(-2px);
+}
+
+/* Avatar circle */
+.about__avatar {
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 15px;
+  color: #FFFFFF;
+  letter-spacing: 0.5px;
+}
+
+.about__avatar--green-dark {
+  background: linear-gradient(135deg, #00DF89, #004d30);
+}
+
+.about__avatar--green-cyan {
+  background: linear-gradient(135deg, #00DF89, #00F0FF);
+}
+
+.about__avatar--green-teal {
+  background: linear-gradient(135deg, #00DF89, #009688);
+}
+
+/* Member info */
+.about__member-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.about__member-name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 16px;
+  color: #FFFFFF;
+}
+
+.about__member-role {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about__header {
+    margin-bottom: 40px;
+  }
+
+  .about__mission p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .about__member-card {
+    padding: 16px 20px;
+    gap: 16px;
+  }
+}
