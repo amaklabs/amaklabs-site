@@ -8,6 +8,9 @@ RUN npm run build
 
 # Stage 2: Serve the built static assets with Nginx
 FROM nginx:stable-alpine
+# Copy custom Nginx configuration to listen on port 5174
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy built files from build stage
 COPY --from=builder /app/dist /usr/share/nginx/html
-EXPOSE 80
+EXPOSE 5174
 CMD ["nginx", "-g", "daemon off;"]
