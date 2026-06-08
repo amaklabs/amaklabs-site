@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { LogoIcon } from './LogoIcon';
 import './Navbar.css';
 
 const NAV_ITEMS = [
-  { label: 'Home', href: '#home' },
-  { label: 'Services', href: '#services' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'AI Workflows', href: '/ai-workflows' },
+  { label: 'Web Dev', href: '/web-dev' },
+  { label: 'Mobile Apps', href: '/mobile-apps' },
+  { label: 'About', href: '/about' },
 ];
+
+const MotionLink = motion(Link);
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -33,29 +36,29 @@ export function Navbar() {
     <nav className={`navbar${scrolled ? ' navbar--scrolled' : ''}`}>
       <div className="navbar__inner">
         {/* Logo */}
-        <a href="#home" className="navbar__logo" onClick={closeMobile}>
+        <Link to="/" className="navbar__logo" onClick={closeMobile}>
           <LogoIcon className="navbar__logo-icon" size={28} />
           <span className="navbar__logo-text">
             amak<span className="navbar__logo-text--light">labs</span>
           </span>
-        </a>
+        </Link>
 
         {/* Desktop links */}
         <ul className="navbar__links">
           {NAV_ITEMS.map((item) => (
             <li key={item.href}>
-              <a href={item.href} className="navbar__link">
+              <Link to={item.href} className="navbar__link">
                 {item.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
 
         {/* Desktop CTA */}
-        <a href="#contact" className="navbar__cta">
+        <Link to="/contact" className="navbar__cta" onClick={closeMobile}>
           <span className="navbar__cta-glow" aria-hidden="true" />
           Get a Quote
-        </a>
+        </Link>
 
         {/* Mobile hamburger */}
         <button
@@ -79,9 +82,9 @@ export function Navbar() {
             transition={{ duration: 0.3, ease: 'easeInOut' }}
           >
             {NAV_ITEMS.map((item, i) => (
-              <motion.a
+              <MotionLink
                 key={item.href}
-                href={item.href}
+                to={item.href}
                 className="navbar__mobile-link"
                 onClick={closeMobile}
                 initial={{ opacity: 0, x: -16 }}
@@ -89,10 +92,10 @@ export function Navbar() {
                 transition={{ delay: 0.05 * i, duration: 0.25 }}
               >
                 {item.label}
-              </motion.a>
+              </MotionLink>
             ))}
-            <motion.a
-              href="#contact"
+            <MotionLink
+              to="/contact"
               className="navbar__mobile-cta"
               onClick={closeMobile}
               initial={{ opacity: 0, y: 8 }}
@@ -100,10 +103,12 @@ export function Navbar() {
               transition={{ delay: 0.3, duration: 0.25 }}
             >
               Get a Quote
-            </motion.a>
+            </MotionLink>
           </motion.div>
         )}
       </AnimatePresence>
     </nav>
   );
 }
+
+export default Navbar;

@@ -1,0 +1,111 @@
+.about-page {
+  padding-top: 80px; /* Offset fixed header */
+  background-color: var(--color-bg);
+}
+
+.about-page__hero {
+  padding-bottom: 0;
+}
+
+.about-page__hero-content {
+  text-align: left;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--container-padding);
+}
+
+.about-page__title {
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 800;
+  line-height: 1.15;
+  color: #FFFFFF;
+  margin-top: 16px;
+  letter-spacing: -1px;
+}
+
+.about-page__desc {
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.5vw, 18px);
+  line-height: 1.75;
+  color: var(--color-text-muted);
+  margin-top: 24px;
+}
+
+/* Values Grid */
+.about-page__values {
+  background-color: var(--color-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-page__values-header {
+  max-width: var(--container-width);
+  margin: 0 auto 48px;
+  padding: var(--container-padding);
+  text-align: left;
+}
+
+.about-page__values-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: var(--container-padding);
+}
+
+.value-card {
+  padding: 32px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  text-align: left;
+  transition: border-color var(--transition-medium), box-shadow var(--transition-medium), transform var(--transition-medium);
+}
+
+.value-card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: var(--glow-green);
+  transform: translateY(-2px);
+}
+
+.value-card__icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(0, 223, 137, 0.08);
+  border: 1px solid rgba(0, 223, 137, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  margin-bottom: 24px;
+}
+
+.value-card__title {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 12px;
+}
+
+.value-card__desc {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-page__values-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .value-card {
+    padding: 24px;
+  }
+}

@@ -1,0 +1,4 @@
+.contact-page {
+  padding-top: 80px; /* Offset fixed header */
+  background-color: var(--color-bg);
+}

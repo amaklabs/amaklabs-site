@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Brain, Globe, Smartphone, Mail, MessageSquare, Cpu, Zap, ShieldCheck, ArrowRight } from 'lucide-react';
+import { AnimatedFlow } from './AnimatedFlow';
 import './Services.css';
 
 const containerVariants = {
@@ -66,30 +67,8 @@ export function Services() {
               </a>
             </div>
 
-            {/* Visual Flow Representation (react-flow-architect inspired) */}
-            <div className="service-card__visual" aria-hidden="true">
-              <div className="flow-node flow-node--trigger">
-                <Mail size={16} className="flow-node__icon" />
-                <span className="flow-node__label">Trigger</span>
-                <span className="flow-node__desc">Customer Email</span>
-              </div>
-              <div className="flow-line">
-                <div className="flow-line__pulse" />
-              </div>
-              <div className="flow-node flow-node--agent">
-                <Cpu size={16} className="flow-node__icon" />
-                <span className="flow-node__label">AI Agent</span>
-                <span className="flow-node__desc">Reasoning & Tool Call</span>
-              </div>
-              <div className="flow-line">
-                <div className="flow-line__pulse flow-line__pulse--delayed" />
-              </div>
-              <div className="flow-node flow-node--action">
-                <MessageSquare size={16} className="flow-node__icon" />
-                <span className="flow-node__label">Action</span>
-                <span className="flow-node__desc">Slack Notification</span>
-              </div>
-            </div>
+            {/* Anime.js Animated Flowchart */}
+            <AnimatedFlow />
           </motion.article>
 
           {/* Card 2: Web Dev (1-col) */}

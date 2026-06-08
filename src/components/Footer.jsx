@@ -1,14 +1,16 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { LinkedinIcon as Linkedin, InstagramIcon as Instagram, GithubIcon as Github, TwitterIcon as Twitter } from './SocialIcons';
 import { LogoIcon } from './LogoIcon';
 import './Footer.css';
 
 const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'Services', href: '#services' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'AI Workflows', href: '/ai-workflows' },
+  { label: 'Web Dev', href: '/web-dev' },
+  { label: 'Mobile Apps', href: '/mobile-apps' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 const socialLinks = [
@@ -24,14 +26,6 @@ const fadeIn = {
 };
 
 export function Footer() {
-  const handleSmoothScroll = (e, href) => {
-    e.preventDefault();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <footer className="footer">
       <motion.div
@@ -44,12 +38,12 @@ export function Footer() {
       >
         {/* Brand */}
         <div className="footer__brand">
-          <span className="footer__logo">
+          <Link to="/" className="footer__logo">
             <LogoIcon className="footer__logo-icon" size={24} />
             <span className="footer__logo-text">
               amak<span className="footer__logo-text--light">labs</span>
             </span>
-          </span>
+          </Link>
           <p className="footer__tagline">
             AI AUTOMATION SOLUTIONS
           </p>
@@ -60,13 +54,9 @@ export function Footer() {
           <ul className="footer__nav-list">
             {navLinks.map((link) => (
               <li key={link.label}>
-                <a
-                  className="footer__nav-link"
-                  href={link.href}
-                  onClick={(e) => handleSmoothScroll(e, link.href)}
-                >
+                <Link className="footer__nav-link" to={link.href}>
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -92,9 +82,11 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="footer__bottom">
         <p className="footer__copy">
-          &copy; 2025 AMAKLABS. All rights reserved.
+          &copy; 2026 AMAKLABS. All rights reserved.
         </p>
       </div>
     </footer>
   );
 }
+
+export default Footer;
