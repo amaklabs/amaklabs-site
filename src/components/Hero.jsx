@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { ParticleSwirl } from './ParticleSwirl';
 import './Hero.css';
+
 
 const WORDS = [
   'custom AI workflows.',
@@ -120,10 +122,10 @@ export function Hero() {
 
           {/* CTA Row */}
           <motion.div className="hero__cta-row" variants={fadeUp}>
-            <a href="#contact" className="btn-primary">
+            <Link to="/contact" className="btn-primary">
               Start a project
               <ArrowRight size={16} />
-            </a>
+            </Link>
             <a href="#portfolio" className="btn-ghost">
               See what we build
             </a>

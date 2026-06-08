@@ -1,280 +1,334 @@
 import { useEffect, useRef } from 'react';
-import * as THREE from 'three';
 
 export function ThreeCanvas({ type }) {
-  const containerRef = useRef(null);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-    const width = containerRef.current.clientWidth;
-    const height = containerRef.current.clientHeight;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-    // 1. Scene setup
-    const scene = new THREE.Scene();
+    let animationFrameId;
+    let width = (canvas.width = canvas.offsetWidth);
+    let height = (canvas.height = canvas.offsetHeight);
 
-    // 2. Camera setup
-    const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 100);
-    camera.position.z = 15;
-
-    // 3. Renderer setup
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    containerRef.current.appendChild(renderer.domElement);
-
-    // 4. Create Parent Group to allow smooth group-level rotation
-    const group = new THREE.Group();
-    scene.add(group);
-
-    // 5. Mouse coordinates tracking for parallax/interaction
-    let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+    let mouse = { x: width / 2, y: height / 2, tx: width / 2, ty: height / 2 };
 
     const handleMouseMove = (e) => {
-      // Map screen cursor coordinates to a normalized -1 to 1 range
-      mouse.targetX = (e.clientX / window.innerWidth) * 2 - 1;
-      mouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
+      const rect = canvas.getBoundingClientRect();
+      mouse.tx = e.clientX - rect.left;
+      mouse.ty = e.clientY - rect.top;
     };
+    window.addEventListener('mousemove', handleMouseMove);
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    const handleResize = () => {
+      if (!canvas) return;
+      width = canvas.width = canvas.offsetWidth;
+      height = canvas.height = canvas.offsetHeight;
+    };
+    window.addEventListener('resize', handleResize);
 
-    // 6. Object creation based on page type
-    let mainObject;
-    let particles;
+    const particleCount = 40;
+    const nodes = [];
+    let labelNames = [];
+    let labeledNodes = [0, 10, 20, 30];
+    
+    // Proximity thresholds and color configurations
+    let proximityThreshold = 140;
+    let nodeColorStr = 'rgba(0, 223, 137, '; // Green
+    let pulseColorStr = 'rgba(0, 240, 255, '; // Cyan
 
     if (type === 'neural') {
-      // Neural network node mesh for AI workflows
-      const particleCount = 60;
-      const geometry = new THREE.BufferGeometry();
-      const positions = new Float32Array(particleCount * 3);
-      const velocities = [];
+      labelNames = ['[AI Agent]', '[LLM Engine]', '[Vector DB]', '[Prompt Cache]'];
+      proximityThreshold = 140;
+      nodeColorStr = 'rgba(0, 223, 137, '; // Green
+      pulseColorStr = 'rgba(0, 240, 255, '; // Cyan
 
-      for (let i = 0; i < particleCount * 3; i += 3) {
-        // Random position in a sphere
-        const u = Math.random();
-        const v = Math.random();
-        const theta = u * 2.0 * Math.PI;
-        const phi = Math.acos(2.0 * v - 1.0);
-        const r = 8 * Math.cbrt(Math.random());
+      // Distribute in a spherical cloud
+      for (let i = 0; i < particleCount; i++) {
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.acos(Math.random() * 2 - 1);
+        const r = 90 + Math.random() * 90;
+        nodes.push({
+          x: r * Math.sin(phi) * Math.cos(theta),
+          y: r * Math.sin(phi) * Math.sin(theta),
+          z: r * Math.cos(phi),
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          vz: (Math.random() - 0.5) * 0.4,
+          driftType: 'spherical_boundary',
+          rLimit: 180,
+          size: labeledNodes.includes(i) ? 4.5 : 1.8,
+          label: labeledNodes.includes(i) ? labelNames[labeledNodes.indexOf(i)] : '',
+          pulseProgress: Math.random()
+        });
+      }
+    } else if (type === 'torus') {
+      labelNames = ['[SaaS API]', '[Next.js Client]', '[Database Sync]', '[Edge Cache]'];
+      proximityThreshold = 150;
+      nodeColorStr = 'rgba(0, 240, 255, '; // Cyan
+      pulseColorStr = 'rgba(0, 223, 137, '; // Green
 
-        positions[i] = r * Math.sin(phi) * Math.cos(theta);
-        positions[i + 1] = r * Math.sin(phi) * Math.sin(theta);
-        positions[i + 2] = r * Math.cos(phi);
+      // Distribute along a Torus Knot curve
+      const p = 2;
+      const q = 3;
+      for (let i = 0; i < particleCount; i++) {
+        const angle = (i / particleCount) * Math.PI * 2;
+        const theta = angle * p;
+        const r = 120 + Math.cos(q * theta / p) * 32;
+        const tx = r * Math.cos(theta);
+        const ty = r * Math.sin(theta);
+        const tz = Math.sin(q * theta / p) * 32;
 
-        velocities.push({
-          x: (Math.random() - 0.5) * 0.05,
-          y: (Math.random() - 0.5) * 0.05,
-          z: (Math.random() - 0.5) * 0.05,
+        nodes.push({
+          x: tx,
+          y: ty,
+          z: tz,
+          baseX: tx,
+          baseY: ty,
+          baseZ: tz,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35,
+          vz: (Math.random() - 0.5) * 0.35,
+          driftType: 'base_offset',
+          offsetLimit: 36,
+          size: labeledNodes.includes(i) ? 4.5 : 1.8,
+          label: labeledNodes.includes(i) ? labelNames[labeledNodes.indexOf(i)] : '',
+          pulseProgress: Math.random()
+        });
+      }
+    } else {
+      // type === 'sphere'
+      labelNames = ['[iOS Client]', '[Android Client]', '[SQLite Sync]', '[Push Service]'];
+      proximityThreshold = 160;
+      nodeColorStr = 'rgba(0, 223, 137, '; // Green
+      pulseColorStr = 'rgba(0, 240, 255, '; // Cyan
+
+      // Distribute on surface of sphere
+      const r = 150;
+      for (let i = 0; i < particleCount; i++) {
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.acos(Math.random() * 2 - 1);
+        nodes.push({
+          theta,
+          phi,
+          angularSpeedTheta: (Math.random() - 0.5) * 0.006,
+          angularSpeedPhi: (Math.random() - 0.5) * 0.006,
+          x: r * Math.sin(phi) * Math.cos(theta),
+          y: r * Math.sin(phi) * Math.sin(theta),
+          z: r * Math.cos(phi),
+          driftType: 'sphere_surface',
+          rVal: r,
+          size: labeledNodes.includes(i) ? 4.5 : 1.8,
+          label: labeledNodes.includes(i) ? labelNames[labeledNodes.indexOf(i)] : '',
+          pulseProgress: Math.random()
+        });
+      }
+    }
+
+    let time = 0;
+    let angleX = 0.2;
+    let angleY = 0;
+    const fov = 420;
+
+    const animate = () => {
+      time += 0.008;
+
+      mouse.x += (mouse.tx - mouse.x) * 0.08;
+      mouse.y += (mouse.ty - mouse.y) * 0.08;
+
+      const targetAngleY = ((mouse.x / width) - 0.5) * 1.0;
+      const targetAngleX = ((mouse.y / height) - 0.5) * 0.5;
+
+      angleY += (targetAngleY - angleY) * 0.06;
+      angleX += (targetAngleX - angleX) * 0.06;
+
+      ctx.fillStyle = '#030303';
+      ctx.fillRect(0, 0, width, height);
+
+      const centerX = width * 0.5;
+      const centerY = height * 0.5;
+
+      // Update positions
+      for (let i = 0; i < particleCount; i++) {
+        const n = nodes[i];
+        if (n.driftType === 'spherical_boundary') {
+          n.x += n.vx;
+          n.y += n.vy;
+          n.z += n.vz;
+
+          const dist = Math.sqrt(n.x*n.x + n.y*n.y + n.z*n.z);
+          if (dist > n.rLimit) {
+            n.vx *= -1;
+            n.vy *= -1;
+            n.vz *= -1;
+          }
+        } else if (n.driftType === 'base_offset') {
+          n.x += n.vx;
+          n.y += n.vy;
+          n.z += n.vz;
+
+          const dx = n.x - n.baseX;
+          const dy = n.y - n.baseY;
+          const dz = n.z - n.baseZ;
+          const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+          if (dist > n.offsetLimit) {
+            n.vx *= -1;
+            n.vy *= -1;
+            n.vz *= -1;
+          }
+        } else if (n.driftType === 'sphere_surface') {
+          n.theta += n.angularSpeedTheta;
+          n.phi += n.angularSpeedPhi;
+
+          if (n.phi < 0.15 || n.phi > Math.PI - 0.15) {
+            n.angularSpeedPhi *= -1;
+          }
+
+          n.x = n.rVal * Math.sin(n.phi) * Math.cos(n.theta);
+          n.y = n.rVal * Math.sin(n.phi) * Math.sin(n.theta);
+          n.z = n.rVal * Math.cos(n.phi);
+        }
+
+        // Pulse progress
+        n.pulseProgress += 0.006;
+        if (n.pulseProgress > 1) {
+          n.pulseProgress = 0;
+        }
+      }
+
+      // Project 3D positions to 2D
+      const projected = [];
+      for (let i = 0; i < particleCount; i++) {
+        const n = nodes[i];
+
+        // Yaw Y
+        let x1 = n.x * Math.cos(angleY) - n.z * Math.sin(angleY);
+        let z1 = n.x * Math.sin(angleY) + n.z * Math.cos(angleY);
+
+        // Pitch X
+        let y2 = n.y * Math.cos(angleX) - z1 * Math.sin(angleX);
+        let z2 = n.y * Math.sin(angleX) + z1 * Math.cos(angleX);
+
+        const scale = fov / (fov + z2);
+        const sx = centerX + x1 * scale;
+        const sy = centerY + y2 * scale;
+
+        projected.push({
+          x: sx,
+          y: sy,
+          z: z2,
+          scale,
+          size: n.size,
+          label: n.label,
+          pulseProgress: n.pulseProgress,
+          originalIndex: i
         });
       }
 
-      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      // Check distance in 3D for lines connections
+      const connections = [];
+      for (let i = 0; i < particleCount; i++) {
+        for (let j = i + 1; j < particleCount; j++) {
+          const n1 = nodes[i];
+          const n2 = nodes[j];
+          const dx = n1.x - n2.x;
+          const dy = n1.y - n2.y;
+          const dz = n1.z - n2.z;
+          const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
 
-      const material = new THREE.PointsMaterial({
-        color: 0x00DF89,
-        size: 0.2,
-        transparent: true,
-        opacity: 0.8,
-      });
-
-      particles = new THREE.Points(geometry, material);
-      group.add(particles);
-
-      // Create lines connecting points
-      const lineMaterial = new THREE.LineBasicMaterial({
-        color: 0x00DF89,
-        transparent: true,
-        opacity: 0.15,
-      });
-
-      const lineGeometry = new THREE.BufferGeometry();
-      const linePositions = new Float32Array(particleCount * particleCount * 6);
-      lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
-      const lineMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
-      group.add(lineMesh);
-
-      mainObject = {
-        tick: () => {
-          const pos = particles.geometry.attributes.position.array;
-          let lineIdx = 0;
-          const linePos = lineMesh.geometry.attributes.position.array;
-
-          // Move points
-          for (let i = 0; i < particleCount; i++) {
-            const idx = i * 3;
-            pos[idx] += velocities[i].x;
-            pos[idx + 1] += velocities[i].y;
-            pos[idx + 2] += velocities[i].z;
-
-            // Bounce back
-            const r = Math.sqrt(pos[idx] ** 2 + pos[idx + 1] ** 2 + pos[idx + 2] ** 2);
-            if (r > 10) {
-              velocities[i].x *= -1;
-              velocities[i].y *= -1;
-              velocities[i].z *= -1;
-            }
-
-            // Draw lines to near points
-            for (let j = i + 1; j < particleCount; j++) {
-              const jdx = j * 3;
-              const dx = pos[idx] - pos[jdx];
-              const dy = pos[idx + 1] - pos[jdx + 1];
-              const dz = pos[idx + 2] - pos[jdx + 2];
-              const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-              if (dist < 5) {
-                linePos[lineIdx] = pos[idx];
-                linePos[lineIdx + 1] = pos[idx + 1];
-                linePos[lineIdx + 2] = pos[idx + 2];
-                linePos[lineIdx + 3] = pos[jdx];
-                linePos[lineIdx + 4] = pos[jdx + 1];
-                linePos[lineIdx + 5] = pos[jdx + 2];
-                lineIdx += 6;
-              }
-            }
+          if (dist < proximityThreshold) {
+            connections.push({ i, j, dist });
           }
-
-          // Reset rest of the line positions
-          for (let k = lineIdx; k < linePos.length; k++) {
-            linePos[k] = 0;
-          }
-
-          particles.geometry.attributes.position.needsUpdate = true;
-          lineMesh.geometry.attributes.position.needsUpdate = true;
-
-          particles.rotation.y += 0.001;
-          lineMesh.rotation.y += 0.001;
-        },
-        dispose: () => {
-          geometry.dispose();
-          material.dispose();
-          lineGeometry.dispose();
-          lineMaterial.dispose();
-        },
-      };
-    } else if (type === 'torus') {
-      // Torus knot for SaaS/Web database flows
-      const geometry = new THREE.TorusKnotGeometry(4, 1.2, 100, 16);
-      const material = new THREE.MeshBasicMaterial({
-        color: 0x00F0FF,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.35,
-      });
-
-      const torus = new THREE.Mesh(geometry, material);
-      group.add(torus);
-
-      mainObject = {
-        tick: (elapsed) => {
-          torus.rotation.x = elapsed * 0.15;
-          torus.rotation.y = elapsed * 0.25;
-        },
-        dispose: () => {
-          geometry.dispose();
-          material.dispose();
-        },
-      };
-    } else {
-      // Floating sphere for Custom Mobile Apps
-      const geometry = new THREE.SphereGeometry(5, 32, 32);
-      const material = new THREE.MeshBasicMaterial({
-        color: 0x00DF89,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.25,
-      });
-
-      const sphere = new THREE.Mesh(geometry, material);
-      group.add(sphere);
-
-      // Add a small inner sphere
-      const innerGeom = new THREE.IcosahedronGeometry(3, 1);
-      const innerMat = new THREE.MeshBasicMaterial({
-        color: 0x00F0FF,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.15,
-      });
-      const innerSphere = new THREE.Mesh(innerGeom, innerMat);
-      group.add(innerSphere);
-
-      mainObject = {
-        tick: (elapsed) => {
-          sphere.rotation.y = elapsed * 0.1;
-          sphere.position.y = Math.sin(elapsed) * 0.4;
-          innerSphere.rotation.x = -elapsed * 0.2;
-          innerSphere.rotation.y = -elapsed * 0.1;
-        },
-        dispose: () => {
-          geometry.dispose();
-          material.dispose();
-          innerGeom.dispose();
-          innerMat.dispose();
-        },
-      };
-    }
-
-    // 7. Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-    scene.add(ambientLight);
-
-    // 8. Animation loop
-    let animationFrameId;
-    const clock = new THREE.Clock();
-
-    const animate = () => {
-      animationFrameId = requestAnimationFrame(animate);
-      const elapsed = clock.getElapsedTime();
-
-      // Apply standard procedural updates (spins, floating offsets)
-      if (mainObject && mainObject.tick) {
-        mainObject.tick(elapsed);
+        }
       }
 
-      // Smoothly interpolate (lerp) current rotation to target cursor coordinates
-      mouse.x += (mouse.targetX - mouse.x) * 0.05;
-      mouse.y += (mouse.targetY - mouse.y) * 0.05;
+      // Draw connection lines and pulses
+      for (let k = 0; k < connections.length; k++) {
+        const conn = connections[k];
+        const p1 = projected[conn.i];
+        const p2 = projected[conn.j];
 
-      // Adjust group yaw (Y axis) and pitch (X axis) based on mouse
-      group.rotation.y = mouse.x * 0.6;
-      group.rotation.x = -mouse.y * 0.4;
+        const distAlpha = (proximityThreshold - conn.dist) / proximityThreshold;
+        const depthAlpha = Math.max(0.02, Math.min(0.22, ((fov - p1.z) / (fov * 1.5)) * distAlpha));
 
-      renderer.render(scene, camera);
+        ctx.lineWidth = 0.8;
+        ctx.strokeStyle = `${nodeColorStr}${depthAlpha})`;
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+
+        // Glowing cyan/green data pulses traveling along lines
+        const progress = (p1.pulseProgress + k * 0.08) % 1.0;
+        const packetX = p1.x + (p2.x - p1.x) * progress;
+        const packetY = p1.y + (p2.y - p1.y) * progress;
+
+        const packetAlpha = depthAlpha * 3.5 * Math.sin(progress * Math.PI);
+        ctx.fillStyle = `${pulseColorStr}${packetAlpha})`;
+        ctx.beginPath();
+        ctx.arc(packetX, packetY, 1.8 * p1.scale, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Painter's algorithm sort
+      projected.sort((a, b) => b.z - a.z);
+
+      // Render projected node circles and Space Grotesk labels
+      for (let i = 0; i < projected.length; i++) {
+        const p = projected[i];
+
+        if (p.x < 0 || p.x > width || p.y < 0 || p.y > height) continue;
+
+        const depthAlpha = Math.max(0.08, Math.min(0.9, (fov - p.z) / (fov * 1.2)));
+        const size = Math.max(1.0, p.scale * p.size);
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+        ctx.fillStyle = p.label ? `${nodeColorStr}${depthAlpha})` : `rgba(255, 255, 255, ${depthAlpha * 0.4})`;
+        ctx.fill();
+
+        if (p.label) {
+          // Inner core glow
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, size * 0.4, 0, Math.PI * 2);
+          ctx.fillStyle = `${pulseColorStr}${depthAlpha})`;
+          ctx.fill();
+
+          ctx.font = `600 ${Math.max(8, Math.floor(9 * p.scale))}px var(--font-heading)`;
+          ctx.fillStyle = `rgba(255, 255, 255, ${depthAlpha * 0.85})`;
+          ctx.fillText(p.label, p.x + size + 8, p.y + 3);
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(animate);
     };
 
     animate();
 
-    // 9. Resize handler
-    const handleResize = () => {
-      if (!containerRef.current) return;
-      const w = containerRef.current.clientWidth;
-      const h = containerRef.current.clientHeight;
-
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-
-      renderer.setSize(w, h);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    // Cleanup listeners and WebGL resources to prevent memory leaks
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
-      if (mainObject && mainObject.dispose) {
-        mainObject.dispose();
-      }
-      if (containerRef.current && renderer.domElement) {
-        containerRef.current.removeChild(renderer.domElement);
-      }
-      renderer.dispose();
     };
   }, [type]);
 
-  return <div ref={containerRef} style={{ width: '100%', height: '100%' }} />;
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{
+        position: 'absolute',
+        inset: 0,
+        width: '100%',
+        height: '100%',
+        display: 'block',
+        pointerEvents: 'none',
+        zIndex: 0,
+      }}
+    />
+  );
 }
 
 export default ThreeCanvas;

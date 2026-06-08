@@ -102,7 +102,7 @@ export function AnimatedFlow() {
   return (
     <div className="service-card__visual" aria-hidden="true" style={{ overflow: 'hidden' }}>
       {/* Node 1: Trigger */}
-      <div 
+      <div
         ref={triggerRef}
         className="flow-node flow-node--trigger"
         onMouseEnter={() => handleMouseEnter(triggerRef)}
@@ -120,7 +120,7 @@ export function AnimatedFlow() {
       </div>
 
       {/* Node 2: AI Agent */}
-      <div 
+      <div
         ref={agentRef}
         className="flow-node flow-node--agent"
         onMouseEnter={() => handleMouseEnter(agentRef)}
@@ -138,7 +138,7 @@ export function AnimatedFlow() {
       </div>
 
       {/* Node 3: Action */}
-      <div 
+      <div
         ref={actionRef}
         className="flow-node flow-node--action"
         onMouseEnter={() => handleMouseEnter(actionRef)}
