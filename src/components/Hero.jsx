@@ -5,16 +5,16 @@ import { ParticleSwirl } from './ParticleSwirl';
 import './Hero.css';
 
 const WORDS = [
-  'custom AI agents.',
-  'next-gen SaaS.',
-  'mobile applications.',
-  'smart workflows.',
+  'custom AI workflows.',
+  'robust web platforms.',
+  'flawless mobile apps.',
+  'automated operations.',
 ];
 
 const TRUST_STATS = [
-  { value: '24+', label: 'products shipped' },
-  { value: '2-4 wks', label: 'avg. MVP launch' },
-  { value: '100%', label: 'AI-equipped stack' },
+  { value: '100%', label: 'custom-engineered code' },
+  { value: '2-4 wks', label: 'average MVP launch' },
+  { value: 'Zero', label: 'maintenance friction' },
 ];
 
 const containerVariants = {
@@ -99,7 +99,7 @@ export function Hero() {
           {/* Badge pill */}
           <motion.div className="hero__badge" variants={fadeIn}>
             <span className="hero__badge-dot" aria-hidden="true" />
-            AI-equipped automation studio
+            Custom AI Workflows & Software Engineering
           </motion.div>
 
           {/* Typing Headline */}
@@ -114,9 +114,8 @@ export function Hero() {
 
           {/* Subheading */}
           <motion.p className="hero__subheading" variants={fadeUp}>
-            AMAKLABS is a modern software studio, AI-native from day one.
-            We automate repetitive work, build flawless SaaS platforms,
-            and design digital products that scale.
+            We design and deploy custom AI workflows and bespoke software that simplify complex business processes.
+            From back-office automations to client-facing web and mobile apps, we build tools that make advanced technology feel like second nature.
           </motion.p>
 
           {/* CTA Row */}

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Brain, Globe, Smartphone, Mail, MessageSquare, Cpu, Zap, Sparkles, ArrowRight } from 'lucide-react';
+import { Brain, Globe, Smartphone, Mail, MessageSquare, Cpu, Zap, ShieldCheck, ArrowRight } from 'lucide-react';
 import './Services.css';
 
 const containerVariants = {
@@ -34,7 +34,7 @@ export function Services() {
         >
           <p className="section-label">WHAT WE BUILD</p>
           <h2 className="section-heading">
-            Services designed to <span className="gradient-text">ship</span>, not just to spec.
+            Services engineered to <span className="gradient-text">simplify operations</span> and scale.
           </h2>
         </motion.div>
 
@@ -52,14 +52,14 @@ export function Services() {
               <div className="service-card__icon">
                 <Brain />
               </div>
-              <h3 className="service-card__title">AI Automation & Custom Agents</h3>
+              <h3 className="service-card__title">AI Workflows & Custom Agents</h3>
               <p className="service-card__description">
-                We build autonomous agents and cognitive workflows that integrate deep reasoning into your operations, connecting APIs, databases, and LLM pipelines.
+                We build custom AI agents that integrate deep reasoning into your day-to-day tools—automating data entry, document processing, and customer routing.
               </p>
               <ul className="service-card__features">
-                <li><span className="service-card__bullet" /> Custom LLM & RAG Systems</li>
-                <li><span className="service-card__bullet" /> Slack & Teams Agent Integrations</li>
-                <li><span className="service-card__bullet" /> Automated Data Pipeline Syncs</li>
+                <li><span className="service-card__bullet" /> Custom LLM & Database Syncs</li>
+                <li><span className="service-card__bullet" /> Slack & Teams Workflow Bots</li>
+                <li><span className="service-card__bullet" /> Lead & Invoice Automations</li>
               </ul>
               <a href="#contact" className="service-card__link">
                 Build an agent <ArrowRight size={14} />
@@ -97,9 +97,9 @@ export function Services() {
             <div className="service-card__icon">
               <Globe />
             </div>
-            <h3 className="service-card__title">SaaS & Web Apps</h3>
+            <h3 className="service-card__title">SaaS & Web Platforms</h3>
             <p className="service-card__description">
-              Blazing-fast, responsive web platforms built on React, Next.js, or Vite, optimized for high conversion and premium feel.
+              High-performance, secure web applications built on React and Next.js. We deliver responsive client portals and administrative dashboards optimized for speed.
             </p>
             <a href="#contact" className="service-card__link">
               Explore web dev <ArrowRight size={14} />
@@ -127,24 +127,24 @@ export function Services() {
             </div>
             <h3 className="service-card__title">Custom Mobile Apps</h3>
             <p className="service-card__description">
-              Native iOS and Android applications built using React Native or Flutter, featuring seamless user experiences.
+              Native iOS and Android apps built with Flutter or React Native. We ensure offline support, smooth user flows, and direct integration with your business APIs.
             </p>
             <a href="#contact" className="service-card__link">
               Build mobile <ArrowRight size={14} />
             </a>
           </motion.article>
 
-          {/* Card 5: Aesthetic Craft (1-col) */}
+          {/* Card 5: Production Reliability (1-col) */}
           <motion.article className="service-card" variants={cardVariants}>
             <div className="service-card__icon">
-              <Sparkles />
+              <ShieldCheck />
             </div>
-            <h3 className="service-card__title">Obsessive Design Quality</h3>
+            <h3 className="service-card__title">Production Reliability</h3>
             <p className="service-card__description">
-              Every transition, shadow, and interaction is designed to feel buttery smooth and premium. Design speaks first.
+              No messy handoffs. We build with strict testing protocols, secure data environments, and clean code, ensuring your systems run 24/7 without friction.
             </p>
             <a href="#contact" className="service-card__link">
-              See guidelines <ArrowRight size={14} />
+              Work with us <ArrowRight size={14} />
             </a>
           </motion.article>
         </motion.div>

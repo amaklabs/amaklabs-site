@@ -109,7 +109,7 @@ export function Contact() {
                 type="tel"
                 name="phone"
                 className="contact__input"
-                placeholder="+92 300 0000000"
+                placeholder="+91 79866 69482"
                 value={formData.phone}
                 onChange={handleChange}
               />
@@ -181,7 +181,7 @@ export function Contact() {
               <MessageCircle size={24} className="contact__info-icon" />
               <div>
                 <span className="contact__info-label">WhatsApp</span>
-                <span className="contact__info-text">+91 98765 43210</span>
+                <span className="contact__info-text">+91 79866 69482</span>
               </div>
             </motion.div>
 

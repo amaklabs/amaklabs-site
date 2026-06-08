@@ -3,23 +3,23 @@ import './About.css';
 
 const teamMembers = [
   {
-    initials: 'AK',
-    name: 'Amaan Khan',
-    role: 'AI Engineer & Founder',
+    initials: 'AS',
+    name: 'Amarpreet Singh Kounsal',
+    role: 'AI Engineer & Co-Founder',
     gradient: 'green-dark',
   },
   {
-    initials: 'SK',
-    name: 'Sara Kumar',
-    role: 'Full Stack Developer',
+    initials: 'AK',
+    name: 'Akashdeep Singh',
+    role: 'Marketing Head & Co-Founder',
     gradient: 'green-cyan',
   },
-  {
-    initials: 'ZR',
-    name: 'Zain Rashid',
-    role: 'UI/UX Designer',
-    gradient: 'green-teal',
-  },
+  // {
+  //   initials: 'ZR',
+  //   name: 'Zain Rashid',
+  //   role: 'UI/UX Designer',
+  //   gradient: 'green-teal',
+  // },
 ];
 
 const fadeUp = {
@@ -60,15 +60,13 @@ export function About() {
             custom={0.2}
           >
             <p>
-              AMAKLABS is a team of engineers, designers, and AI specialists
-              obsessed with building technology that matters. We don&rsquo;t just
-              write code — we architect solutions that drive real results.
+              At AMAKLABS, we believe technology should work for you, not the other way around.
+              Our vision is to build software that removes friction. We design custom AI workflows and robust applications that fit your business like a glove—making advanced technology feel like second nature.
             </p>
             <p>
-              Founded with a vision to make cutting-edge AI accessible to
-              businesses of all sizes, we combine deep technical expertise with
-              creative problem-solving to deliver solutions that truly transform
-              operations.
+              As a reliable engineering partner, we don&rsquo;t just hand over code.
+              We build, deploy, and actively support your systems to ensure zero business interruption.
+              Whether you are automating spreadsheets into intelligent agents or launching a new mobile app, we deliver quality you can depend on.
             </p>
           </motion.div>
 
