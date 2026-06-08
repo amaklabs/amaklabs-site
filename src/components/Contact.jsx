@@ -31,15 +31,41 @@ export function Contact() {
     service: '',
     message: '',
   });
+  const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error'
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setStatus('submitting');
+    try {
+      const response = await fetch('https://n8n.amaklabs.com/webhook/contact-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit form');
+      }
+
+      setStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        service: '',
+        message: '',
+      });
+    } catch (error) {
+      console.error('Submission error:', error);
+      setStatus('error');
+    }
   };
 
   return (
@@ -147,9 +173,42 @@ export function Contact() {
               />
             </label>
 
-            <button type="submit" className="btn-primary contact__submit">
-              <Send size={18} />
-              Send Message
+            {status === 'success' && (
+              <motion.div
+                className="contact__success"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                Thank you! Your message has been sent successfully. We will get back to you and send you a follow-up link to connect soon.
+              </motion.div>
+            )}
+
+            {status === 'error' && (
+              <motion.div
+                className="contact__error"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                Oops! Something went wrong. Please try again or reach out to us directly.
+              </motion.div>
+            )}
+
+            <button
+              type="submit"
+              className="btn-primary contact__submit"
+              disabled={status === 'submitting'}
+            >
+              {status === 'submitting' ? (
+                <>
+                  <span className="spinner"></span>
+                  Sending...
+                </>
+              ) : (
+                <>
+                  <Send size={18} />
+                  Send Message
+                </>
+              )}
             </button>
           </motion.form>
 
