@@ -12,6 +12,9 @@ const WebDev = lazy(() => import('./pages/WebDev'));
 const MobileApps = lazy(() => import('./pages/MobileApps'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const TermsOfService = lazy(() => import('./pages/TermsOfService'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 // Minimal fallback spinner
 function PageLoader() {
@@ -56,6 +59,9 @@ function App() {
           <Route path="/mobile-apps" element={<MobileApps />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
       <Footer />

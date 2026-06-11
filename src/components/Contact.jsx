@@ -268,7 +268,7 @@ export function Contact() {
               custom={0.9}
             >
               <a
-                href="https://linkedin.com"
+                href="https://linkedin.com/company/amaklabs"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact__social-link"
@@ -277,7 +277,7 @@ export function Contact() {
                 <Linkedin size={20} />
               </a>
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/amaklabs"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact__social-link"
@@ -286,7 +286,7 @@ export function Contact() {
                 <Instagram size={20} />
               </a>
               <a
-                href="https://github.com"
+                href="https://github.com/amaklabs"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact__social-link"
@@ -295,7 +295,7 @@ export function Contact() {
                 <Github size={20} />
               </a>
               <a
-                href="https://twitter.com"
+                href="https://twitter.com/amaklabs"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact__social-link"

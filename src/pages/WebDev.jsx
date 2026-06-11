@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { ThreeCanvas } from '../components/ThreeCanvas';
 import { ArrowRight, Globe, Code2, Gauge, Server, Cpu } from 'lucide-react';
+import { SEO } from '../components/SEO';
 import './ServicePage.css';
 
 const fadeUp = {
@@ -15,6 +17,11 @@ const fadeUp = {
 export function WebDev() {
   return (
     <div className="service-page">
+      <SEO 
+        title="Custom Web Platforms & React SaaS Apps" 
+        description="Bespoke SaaS platforms and web portals built on React and Next.js. Deliver lightning-fast performance and clean UI/UX designs. Build a platform."
+        path="/web-dev"
+      />
       {/* Hero Header */}
       <header className="service-page__hero">
         <div className="container service-page__hero-grid">
@@ -32,9 +39,9 @@ export function WebDev() {
             <p className="service-page__lead">
               We design and engineer high-performance web platforms that engage users and convert visitors. From administrative panels to customer portal dashboards, we build clean, lightning-fast interfaces.
             </p>
-            <a href="/contact" className="btn-primary">
+            <Link to="/contact" className="btn-primary">
               Build a platform <ArrowRight size={16} />
-            </a>
+            </Link>
           </motion.div>
 
           <motion.div
@@ -156,7 +163,7 @@ export function WebDev() {
           <div className="cta-final__box">
             <h2>Ready to build your next custom web platform?</h2>
             <p>Tell us about your requirements and we'll engineer a high-performance solution for your business.</p>
-            <a href="/contact" className="btn-primary">Get Started</a>
+            <Link to="/contact" className="btn-primary">Get Started</Link>
           </div>
         </div>
       </section>

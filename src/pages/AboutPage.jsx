@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { About } from '../components/About';
 import { ShieldCheck, HeartHandshake, Eye, Sparkles } from 'lucide-react';
+import { SEO } from '../components/SEO';
 import './AboutPage.css';
 
 const fadeUp = {
@@ -38,6 +39,11 @@ const VALUES = [
 export function AboutPage() {
   return (
     <div className="about-page">
+      <SEO 
+        title="AI Engineering Partner & Software Team" 
+        description="Meet the software engineers building friction-free technology. We act as your fractional CTO for custom AI agent deployments. Work with us."
+        path="/about"
+      />
       {/* Intro Banner */}
       <section className="about-page__hero section">
         <div className="container">

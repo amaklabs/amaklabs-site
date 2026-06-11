@@ -73,6 +73,7 @@
   color: var(--color-primary);
   display: inline-block;
   min-height: 1.05em;
+  white-space: nowrap;
 }
 
 .hero__heading-cursor {

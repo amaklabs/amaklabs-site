@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { ThreeCanvas } from '../components/ThreeCanvas';
 import { ArrowRight, Bot, Database, Zap, ShieldAlert, Cpu } from 'lucide-react';
+import { SEO } from '../components/SEO';
 import './ServicePage.css';
 
 const fadeUp = {
@@ -15,6 +17,11 @@ const fadeUp = {
 export function AiWorkflows() {
   return (
     <div className="service-page">
+      <SEO 
+        title="Custom AI Workflows & Autonomous Agents" 
+        description="Automate spreadsheets and sync legacy databases with custom AI agents. Connect Slack or Teams bots to streamline operations. Request a proposal."
+        path="/ai-workflows"
+      />
       {/* Hero Header */}
       <header className="service-page__hero">
         <div className="container service-page__hero-grid">
@@ -32,9 +39,9 @@ export function AiWorkflows() {
             <p className="service-page__lead">
               Connect your legacy spreadsheets, databases, and APIs. We build custom agents that execute business logic, process files, and handle operations automatically.
             </p>
-            <a href="/contact" className="btn-primary">
+            <Link to="/contact" className="btn-primary">
               Book a workflow consultation <ArrowRight size={16} />
-            </a>
+            </Link>
           </motion.div>
 
           <motion.div
@@ -156,7 +163,7 @@ export function AiWorkflows() {
           <div className="cta-final__box">
             <h2>Let's build a simpler business workflow.</h2>
             <p>Tell us about your manual processes and we'll draft a custom workflow proposal for your team.</p>
-            <a href="/contact" className="btn-primary">Get Started</a>
+            <Link to="/contact" className="btn-primary">Get Started</Link>
           </div>
         </div>
       </section>

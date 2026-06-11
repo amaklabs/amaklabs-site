@@ -14,10 +14,10 @@ const navLinks = [
 ];
 
 const socialLinks = [
-  { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-  { icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
-  { icon: Github, href: 'https://github.com', label: 'GitHub' },
-  { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
+  { icon: Linkedin, href: 'https://linkedin.com/company/amaklabs', label: 'LinkedIn' },
+  { icon: Instagram, href: 'https://instagram.com/amaklabs', label: 'Instagram' },
+  { icon: Github, href: 'https://github.com/amaklabs', label: 'GitHub' },
+  { icon: Twitter, href: 'https://twitter.com/amaklabs', label: 'Twitter' },
 ];
 
 const fadeIn = {
@@ -84,6 +84,11 @@ export function Footer() {
         <p className="footer__copy">
           &copy; 2026 AMAKLABS. All rights reserved.
         </p>
+        <div className="footer__legal">
+          <Link to="/privacy-policy" className="footer__legal-link">Privacy Policy</Link>
+          <span className="footer__legal-divider">|</span>
+          <Link to="/terms-of-service" className="footer__legal-link">Terms of Service</Link>
+        </div>
       </div>
     </footer>
   );

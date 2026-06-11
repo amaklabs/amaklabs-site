@@ -7,10 +7,10 @@ import './Hero.css';
 
 
 const WORDS = [
-  'custom AI workflows.',
-  'robust web platforms.',
-  'flawless mobile apps.',
-  'automated operations.',
+  'AI.',
+  'Software.',
+  'Apps.',
+  'Automations.',
 ];
 
 const TRUST_STATS = [

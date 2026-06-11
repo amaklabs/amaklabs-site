@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { ThreeCanvas } from '../components/ThreeCanvas';
 import { ArrowRight, Smartphone, Compass, Cpu, Zap, Activity } from 'lucide-react';
+import { SEO } from '../components/SEO';
 import './ServicePage.css';
 
 const fadeUp = {
@@ -15,6 +17,11 @@ const fadeUp = {
 export function MobileApps() {
   return (
     <div className="service-page">
+      <SEO 
+        title="Custom Mobile Apps for iOS & Android" 
+        description="High-performance native iOS and Android mobile apps engineered with React Native and Flutter. Implement offline-first syncing. Get a proposal."
+        path="/mobile-apps"
+      />
       {/* Hero Header */}
       <header className="service-page__hero">
         <div className="container service-page__hero-grid">
@@ -32,9 +39,9 @@ export function MobileApps() {
             <p className="service-page__lead">
               We design and develop native iOS and Android apps using React Native and Flutter. Get smooth scroll interactions, offline data support, and custom integrations tailored to your mobile workflows.
             </p>
-            <a href="/contact" className="btn-primary">
+            <Link to="/contact" className="btn-primary">
               Build a mobile app <ArrowRight size={16} />
-            </a>
+            </Link>
           </motion.div>
 
           <motion.div
@@ -156,7 +163,7 @@ export function MobileApps() {
           <div className="cta-final__box">
             <h2>Ready to launch your custom mobile app?</h2>
             <p>Tell us about your target users and we'll draft a mobile development proposal for your project.</p>
-            <a href="/contact" className="btn-primary">Get Started</a>
+            <Link to="/contact" className="btn-primary">Get Started</Link>
           </div>
         </div>
       </section>

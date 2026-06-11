@@ -171,3 +171,28 @@
     justify-content: center;
   }
 }
+
+.footer__legal {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+  align-items: center;
+}
+
+.footer__legal-link {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.footer__legal-link:hover {
+  color: var(--color-primary);
+}
+
+.footer__legal-divider {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.1);
+}
