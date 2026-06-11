@@ -29,13 +29,22 @@ export function SEO({ title, description, path }) {
     // 3. Open Graph Tags
     setMetaTag('property', 'og:title', title ? `${title} | ${siteName}` : 'AMAKLABS');
     setMetaTag('property', 'og:description', formattedDescription);
-    setMetaTag('property', 'og:url', `https://amaklabs.com${path || ''}`);
+    setMetaTag('property', 'og:url', `https://www.amaklabs.com${path || ''}`);
     setMetaTag('property', 'og:type', 'website');
 
     // 4. Twitter Card Tags
     setMetaTag('name', 'twitter:card', 'summary_large_image');
     setMetaTag('name', 'twitter:title', title ? `${title} | ${siteName}` : 'AMAKLABS');
     setMetaTag('name', 'twitter:description', formattedDescription);
+
+    // 5. Canonical Link management
+    let canonicalEl = document.querySelector('link[rel="canonical"]');
+    if (!canonicalEl) {
+      canonicalEl = document.createElement('link');
+      canonicalEl.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalEl);
+    }
+    canonicalEl.setAttribute('href', `https://www.amaklabs.com${path || ''}`);
 
   }, [title, description, path]);
 

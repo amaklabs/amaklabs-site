@@ -8,18 +8,78 @@
   <meta name="description"
     content="AMAKLABS — We Engineer Intelligence. AI automation systems, powerful web platforms, and cutting-edge mobile apps that scale your business beyond limits." />
   <title>AMAKLABS — AI Automation Agency | Engineering Intelligence</title>
+  
+  <!-- Canonical URL to standardise search results and prevent duplicate content penalties -->
+  <link rel="canonical" href="https://www.amaklabs.com/" />
+  
+  <!-- Apple Touch Icon for mobile platforms & bookmarks -->
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+  
+  <!-- Open Graph & Social sharing parameters -->
+  <meta property="og:title" content="AMAKLABS — AI Automation Agency & Custom Software" />
+  <meta property="og:description" content="AMAKLABS designs and engineers custom AI workflows, SaaS web platforms, and native mobile applications that automate business processes." />
+  <meta property="og:url" content="https://www.amaklabs.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://www.amaklabs.com/favicon.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AMAKLABS — AI Automation Agency & Custom Software" />
+  <meta name="twitter:description" content="AMAKLABS designs and engineers custom AI workflows, SaaS web platforms, and native mobile applications that automate business processes." />
+  <meta name="twitter:image" content="https://www.amaklabs.com/favicon.svg" />
+
+  <!-- Core Schema.org JSON-LD Structured Data (Readable by static crawlers) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "AMAKLABS",
+      "url": "https://www.amaklabs.com",
+      "logo": "https://www.amaklabs.com/favicon.svg",
+      "description": "AMAKLABS designs and engineers custom AI workflows, SaaS web platforms, and native mobile applications that automate business processes.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+91-79866-69482",
+        "contactType": "customer service",
+        "email": "support@amaklabs.com",
+        "areaServed": "IN",
+        "availableLanguage": ["en"]
+      },
+      "sameAs": [
+        "https://linkedin.com/company/amaklabs",
+        "https://github.com/amaklabs",
+        "https://twitter.com/amaklabs",
+        "https://instagram.com/amaklabs"
+      ]
+    }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700;800&display=swap"
     rel="stylesheet" />
+
+  <style>
+    /* Visually hidden but fully accessible to SEO crawlers and screen readers */
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+  </style>
 </head>
 
 <body>
   <div id="root">
-    <!-- SEO & AEO Crawler Fallback Skeleton (Visible when JS is disabled or during raw crawls) -->
-    <noscript>
+    <!-- SEO & AEO Crawler Fallback Skeleton (Visible to static search bots, cleared on React mount) -->
+    <div class="visually-hidden">
       <header>
+        <img src="/favicon.svg" alt="AMAKLABS Logo" />
         <h1>AMAKLABS — AI Automation Agency & Custom Software</h1>
         <nav>
           <a href="/">Home</a> | 
@@ -51,7 +111,7 @@
           <a href="https://instagram.com/amaklabs" target="_blank" rel="noopener">Instagram</a>
         </footer>
       </main>
-    </noscript>
+    </div>
   </div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
