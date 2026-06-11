@@ -21,8 +21,8 @@ export function WebDev() {
   return (
     <div className="service-page">
       <SEO 
-        title="Custom Web Platforms & React SaaS Apps" 
-        description="Bespoke SaaS platforms and web portals built on React and Next.js. Deliver lightning-fast performance and clean UI/UX designs. Build a platform."
+        title="Next.js SaaS Development Agency | React SaaS Platforms" 
+        description="We are a Next.js SaaS development agency specializing in React SaaS platform development. We engineer high-performance custom SaaS platforms and web portals."
         path="/web-dev"
       />
       {/* Hero Header */}
@@ -40,10 +40,10 @@ export function WebDev() {
               SaaS & Web <span className="gradient-text">Platforms</span>
             </h1>
             <p className="service-page__lead">
-              We design and engineer high-performance web platforms that engage users and convert visitors. From administrative panels to customer portal dashboards, we build clean, lightning-fast interfaces.
+              We are a Next.js SaaS development agency designing high-performance custom web systems. From customer portal dashboards to React SaaS platform development, we build clean, lightning-fast interfaces.
             </p>
             <blockquote className="service-page__tldr-block" style={{ marginBottom: '32px' }}>
-              <strong>TL;DR:</strong> AMAKLABS engineers custom SaaS platforms and web applications using React and Next.js. We prioritize sub-second page loads, Core Web Vitals, and strict TypeScript logic to ensure performance and SEO indexation.
+              <strong>TL;DR:</strong> AMAKLABS is a premier Next.js SaaS development agency. We engineer responsive React SaaS platform development projects with custom API routing, sub-second edge loads, and optimized Core Web Vitals.
             </blockquote>
             <Link to="/contact" className="btn-primary">
               Build a platform <ArrowRight size={16} />
@@ -210,8 +210,8 @@ export function WebDev() {
               a: "Customer retention. Users bounce if loading takes longer than 2 seconds. In addition, Core Web Vitals (like LCP and CLS) determine your public domain search ranking."
             },
             {
-              q: "Do you use Next.js or Astro?",
-              a: "We use both. Astro is our standard choice for static marketing sites to ensure zero JavaScript bloat, while Next.js is preferred for dynamic dashboards and portals."
+              q: "What services does a Next.js SaaS development agency provide?",
+              a: "We provide complete React SaaS platform development, static site compilation using Astro, API integrations, edge CDN deployments, and database configuration tailored for fast user growth."
             },
             {
               q: "How do you secure SaaS applications?",
@@ -222,8 +222,8 @@ export function WebDev() {
               a: "Yes. All platforms use custom responsive grid alignments to render pixel-perfect interfaces across all viewing widths, from mobile phones to high-res displays."
             },
             {
-              q: "How do you handle database connections?",
-              a: "We integrate modern databases (such as PostgreSQL and Supabase) using secure connection pools and strict backend ORM querying frameworks."
+              q: "How is database security handled in SaaS platform development agency projects?",
+              a: "We connect to modern databases like PostgreSQL securely using pooled connections, execute raw queries through validated ORMs, and separate configuration parameters using strict environment parameters."
             }
           ].map((faq, idx) => (
             <div 

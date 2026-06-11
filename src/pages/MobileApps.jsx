@@ -21,8 +21,8 @@ export function MobileApps() {
   return (
     <div className="service-page">
       <SEO 
-        title="Custom Mobile Apps for iOS & Android" 
-        description="High-performance native iOS and Android mobile apps engineered with React Native and Flutter. Implement offline-first syncing. Get a proposal."
+        title="Custom Mobile App Development Proposal | Offline-First Sync" 
+        description="Get a custom mobile app development proposal. We develop offline-first mobile app sync systems using Flutter and React Native for iOS & Android."
         path="/mobile-apps"
       />
       {/* Hero Header */}
@@ -40,10 +40,10 @@ export function MobileApps() {
               Custom Mobile <span className="gradient-text">Apps</span>
             </h1>
             <p className="service-page__lead">
-              We design and develop native iOS and Android apps using React Native and Flutter. Get smooth scroll interactions, offline data support, and custom integrations tailored to your mobile workflows.
+              We design and develop cross platform applications using React Native and Flutter. Request a custom mobile app development proposal detailing local SQLite caching, offline-first mobile app sync, and fluid UI interaction.
             </p>
             <blockquote className="service-page__tldr-block" style={{ marginBottom: '32px' }}>
-              <strong>TL;DR:</strong> AMAKLABS develops native iOS and Android applications utilizing React Native and Flutter. We enforce local database caching for offline-first support and connect directly to your custom API workflows.
+              <strong>TL;DR:</strong> AMAKLABS delivers cross platform app development cost efficiency with single-codebase architectures. We specialize in offline-first mobile database sync and custom API workflow triggers.
             </blockquote>
             <Link to="/contact" className="btn-primary">
               Build a mobile app <ArrowRight size={16} />
@@ -206,16 +206,16 @@ export function MobileApps() {
         <div className="service-page__faq-list">
           {[
             {
-              q: "Do you write Swift and Kotlin or use cross-platform frameworks?",
-              a: "We specialize in cross-platform development (using Flutter or React Native) because it reduces development and maintenance budgets by 50% while delivering true 60fps native performance."
+              q: "What are the benefits of cross-platform mobile apps vs native apps?",
+              a: "Cross-platform frameworks like Flutter or React Native compile to native machine binaries. This delivers true 60fps native feel while optimizing cross platform app development cost efficiency by using a single codebase."
             },
             {
-              q: "Can the mobile app function completely offline?",
-              a: "Yes. We build apps with offline-first caching using local SQLite databases, letting users perform checks and log data. Queue actions sync as soon as connection returns."
+              q: "How does offline-first database sync work in mobile apps?",
+              a: "We store your data locally using encrypted SQLite caches (like Drift or WatermelonDB). When offline, the app enqueues actions and syncs with the server as soon as connection is re-established."
             },
             {
-              q: "How do you handle App Store and Play Store releases?",
-              a: "We handle the entire deployment pipeline—compiling production binaries, configuring signing certificates, drafting store materials, and submitting files for store review."
+              q: "How do we request a custom mobile app development proposal?",
+              a: "You can request a custom mobile app development proposal by contacting us. We draft detailed requirements, pricing structure, milestones, architecture layout, and complete deployment support for stores."
             },
             {
               q: "Can a mobile app trigger AI agents directly?",

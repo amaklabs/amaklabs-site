@@ -21,8 +21,8 @@ export function AiWorkflows() {
   return (
     <div className="service-page">
       <SEO 
-        title="Custom AI Workflows & Autonomous Agents" 
-        description="Automate spreadsheets and sync legacy databases with custom AI agents. Connect Slack or Teams bots to streamline operations. Request a proposal."
+        title="Custom AI Workflows for Business | AI Agent Agency" 
+        description="We design custom AI workflows for business and deploy AI automation for legacy databases. Request a consultation with our custom AI agent agency."
         path="/ai-workflows"
       />
       {/* Hero Header */}
@@ -40,10 +40,10 @@ export function AiWorkflows() {
               Custom AI Workflows <span className="gradient-text">& Agents</span>
             </h1>
             <p className="service-page__lead">
-              Connect your legacy spreadsheets, databases, and APIs. We build custom agents that execute business logic, process files, and handle operations automatically.
+              Connect your legacy spreadsheets, databases, and APIs. As a custom AI agent agency, we build custom AI workflows for business that execute logic, process files, and handle complex operations automatically.
             </p>
             <blockquote className="service-page__tldr-block" style={{ marginBottom: '32px' }}>
-              <strong>TL;DR:</strong> AMAKLABS builds custom AI agent systems connecting databases and legacy tools. By automating text analysis, routing, and operations, we remove human overhead with maximum security boundaries.
+              <strong>TL;DR:</strong> AMAKLABS is a custom AI agent agency that engineers custom AI workflows for business. We implement AI automation for legacy databases to streamline operations while maintaining absolute data security.
             </blockquote>
             <Link to="/contact" className="btn-primary">
               Book a workflow consultation <ArrowRight size={16} />
@@ -216,12 +216,12 @@ export function AiWorkflows() {
               a: "Direct context understanding. Unlike standard static script integrations, AI agents parse natural language instructions, emails, and unstructured PDFs, executing reasoning-based operations automatically."
             },
             {
-              q: "Do AI agents connect with existing databases?",
-              a: "Yes. We synchronize autonomous agents directly with database engines (like Postgres) and SaaS APIs (like HubSpot and Slack) without modifying your current infrastructure."
+              q: "How do you build AI automation for legacy databases?",
+              a: "We build secure pipelines connecting autonomous agents directly to your legacy database engines (like PostgreSQL) and SaaS APIs (like HubSpot) without requiring modifications to your current setup."
             },
             {
-              q: "How do you prevent AI model hallucinations?",
-              a: "We implement strict boundary rules, anchor generation using secure retrieval (RAG) structures, and add human approvals for actions like payments and notifications."
+              q: "How do you prevent AI model hallucinations in database operations?",
+              a: "We implement strict boundary rules, anchor generation using secure retrieval (RAG) structures, and add human approvals for critical operations like database updates, payments, and external messaging."
             },
             {
               q: "How secure are these AI workflow setups?",
