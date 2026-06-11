@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ThreeCanvas } from '../components/ThreeCanvas';
@@ -15,6 +16,8 @@ const fadeUp = {
 };
 
 export function MobileApps() {
+  const [activeFaq, setActiveFaq] = useState(null);
+
   return (
     <div className="service-page">
       <SEO 
@@ -39,6 +42,9 @@ export function MobileApps() {
             <p className="service-page__lead">
               We design and develop native iOS and Android apps using React Native and Flutter. Get smooth scroll interactions, offline data support, and custom integrations tailored to your mobile workflows.
             </p>
+            <blockquote className="service-page__tldr-block" style={{ marginBottom: '32px' }}>
+              <strong>TL;DR:</strong> AMAKLABS develops native iOS and Android applications utilizing React Native and Flutter. We enforce local database caching for offline-first support and connect directly to your custom API workflows.
+            </blockquote>
             <Link to="/contact" className="btn-primary">
               Build a mobile app <ArrowRight size={16} />
             </Link>
@@ -154,6 +160,86 @@ export function MobileApps() {
               <p>Connect your mobile app directly to your custom backend and trigger AI agent workflows instantly from user interactions on the screen.</p>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Comparison Table Section */}
+      <section className="service-page__table-section">
+        <h2>Mobile Framework Comparison</h2>
+        <div className="service-page__table-wrapper">
+          <table className="service-page__table">
+            <thead>
+              <tr>
+                <th>Framework Type</th>
+                <th>Performance Threshold</th>
+                <th>Offline Reliability</th>
+                <th>Development Cost efficiency</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Hybrid Web Shells</td>
+                <td>Poor (Web render lags)</td>
+                <td>Zero (Requires connection)</td>
+                <td>Low (Wraps existing site)</td>
+              </tr>
+              <tr>
+                <td>Cross-Platform (Flutter/RN)</td>
+                <td>Excellent (60fps native UI)</td>
+                <td>High (Local database syncing)</td>
+                <td>Excellent (Single code repository)</td>
+              </tr>
+              <tr>
+                <td>Native (Swift/Kotlin)</td>
+                <td>Maximum (Hardware direct)</td>
+                <td>High (Local database syncing)</td>
+                <td>Poor (Separate codebase setups)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="service-page__faq-section">
+        <h2 className="service-page__faq-heading">Frequently Asked Questions</h2>
+        <div className="service-page__faq-list">
+          {[
+            {
+              q: "Do you write Swift and Kotlin or use cross-platform frameworks?",
+              a: "We specialize in cross-platform development (using Flutter or React Native) because it reduces development and maintenance budgets by 50% while delivering true 60fps native performance."
+            },
+            {
+              q: "Can the mobile app function completely offline?",
+              a: "Yes. We build apps with offline-first caching using local SQLite databases, letting users perform checks and log data. Queue actions sync as soon as connection returns."
+            },
+            {
+              q: "How do you handle App Store and Play Store releases?",
+              a: "We handle the entire deployment pipeline—compiling production binaries, configuring signing certificates, drafting store materials, and submitting files for store review."
+            },
+            {
+              q: "Can a mobile app trigger AI agents directly?",
+              a: "Yes. The mobile app connects securely to your custom backend API endpoints, enabling users to trigger and monitor AI workflows from their mobile screen."
+            },
+            {
+              q: "What is the average timeline to build a mobile app?",
+              a: "A functional cross-platform MVP app with core features and API integrations takes roughly 4 to 6 weeks to fully develop, test, and submit."
+            }
+          ].map((faq, idx) => (
+            <div 
+              key={idx} 
+              className={`service-faq-item${activeFaq === idx ? ' service-faq-item--active' : ''}`}
+              onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
+            >
+              <div className="service-faq-item__question">
+                <span>{faq.q}</span>
+                <span className="service-faq-item__toggle" />
+              </div>
+              <div className="service-faq-item__answer">
+                <p>{faq.a}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 

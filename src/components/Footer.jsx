@@ -10,6 +10,7 @@ const navLinks = [
   { label: 'Web Dev', href: '/web-dev' },
   { label: 'Mobile Apps', href: '/mobile-apps' },
   { label: 'About', href: '/about' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
 ];
 

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ThreeCanvas } from '../components/ThreeCanvas';
@@ -15,6 +16,8 @@ const fadeUp = {
 };
 
 export function AiWorkflows() {
+  const [activeFaq, setActiveFaq] = useState(null);
+
   return (
     <div className="service-page">
       <SEO 
@@ -39,6 +42,9 @@ export function AiWorkflows() {
             <p className="service-page__lead">
               Connect your legacy spreadsheets, databases, and APIs. We build custom agents that execute business logic, process files, and handle operations automatically.
             </p>
+            <blockquote className="service-page__tldr-block" style={{ marginBottom: '32px' }}>
+              <strong>TL;DR:</strong> AMAKLABS builds custom AI agent systems connecting databases and legacy tools. By automating text analysis, routing, and operations, we remove human overhead with maximum security boundaries.
+            </blockquote>
             <Link to="/contact" className="btn-primary">
               Book a workflow consultation <ArrowRight size={16} />
             </Link>
@@ -154,6 +160,92 @@ export function AiWorkflows() {
               <p>Control your AI workflows directly from your communication apps. Approve invoice generation, ask for support summaries, or trigger syncs with custom chat commands.</p>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Comparison Table Section */}
+      <section className="service-page__table-section">
+        <h2>Automation Strategy Comparison</h2>
+        <div className="service-page__table-wrapper">
+          <table className="service-page__table">
+            <thead>
+              <tr>
+                <th>Metric / Capability</th>
+                <th>Standard Scripts</th>
+                <th>Visual Workflows</th>
+                <th>Autonomous Agents</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Decision Engine</td>
+                <td>Static rules</td>
+                <td>Hard-coded filters</td>
+                <td>Semantic Reasoning</td>
+              </tr>
+              <tr>
+                <td>Data Format support</td>
+                <td>Structured only</td>
+                <td>Needs pre-parsers</td>
+                <td>Handles raw files/mails</td>
+              </tr>
+              <tr>
+                <td>Error Handling</td>
+                <td>Halts / Script crash</td>
+                <td>Halts execution</td>
+                <td>Heuristic recovery</td>
+              </tr>
+              <tr>
+                <td>Maintenance overhead</td>
+                <td>High developer effort</td>
+                <td>Medium configuration</td>
+                <td>Low operational friction</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="service-page__faq-section">
+        <h2 className="service-page__faq-heading">Frequently Asked Questions</h2>
+        <div className="service-page__faq-list">
+          {[
+            {
+              q: "What is the main benefit of custom AI agents?",
+              a: "Direct context understanding. Unlike standard static script integrations, AI agents parse natural language instructions, emails, and unstructured PDFs, executing reasoning-based operations automatically."
+            },
+            {
+              q: "Do AI agents connect with existing databases?",
+              a: "Yes. We synchronize autonomous agents directly with database engines (like Postgres) and SaaS APIs (like HubSpot and Slack) without modifying your current infrastructure."
+            },
+            {
+              q: "How do you prevent AI model hallucinations?",
+              a: "We implement strict boundary rules, anchor generation using secure retrieval (RAG) structures, and add human approvals for actions like payments and notifications."
+            },
+            {
+              q: "How secure are these AI workflow setups?",
+              a: "Fully secure. We build integrations using strict CORS rules, encrypt all API tokens securely, and execute models inside isolated serverless container networks."
+            },
+            {
+              q: "What is the average timeline to build an agent?",
+              a: "We design, develop, test, and ship custom AI agent MVPs within a rapid 2-to-4 week development window."
+            }
+          ].map((faq, idx) => (
+            <div 
+              key={idx} 
+              className={`service-faq-item${activeFaq === idx ? ' service-faq-item--active' : ''}`}
+              onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
+            >
+              <div className="service-faq-item__question">
+                <span>{faq.q}</span>
+                <span className="service-faq-item__toggle" />
+              </div>
+              <div className="service-faq-item__answer">
+                <p>{faq.a}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 

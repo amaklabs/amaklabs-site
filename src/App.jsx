@@ -15,6 +15,9 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const BlogPage = lazy(() => import('./pages/BlogPage'));
+const BlogDetailPage = lazy(() => import('./pages/BlogDetailPage'));
+const BlogDashboard = lazy(() => import('./pages/BlogDashboard'));
 
 // Minimal fallback spinner
 function PageLoader() {
@@ -61,6 +64,9 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogDetailPage />} />
+          <Route path="/dashboard" element={<BlogDashboard />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ThreeCanvas } from '../components/ThreeCanvas';
@@ -15,6 +16,8 @@ const fadeUp = {
 };
 
 export function WebDev() {
+  const [activeFaq, setActiveFaq] = useState(null);
+
   return (
     <div className="service-page">
       <SEO 
@@ -39,6 +42,9 @@ export function WebDev() {
             <p className="service-page__lead">
               We design and engineer high-performance web platforms that engage users and convert visitors. From administrative panels to customer portal dashboards, we build clean, lightning-fast interfaces.
             </p>
+            <blockquote className="service-page__tldr-block" style={{ marginBottom: '32px' }}>
+              <strong>TL;DR:</strong> AMAKLABS engineers custom SaaS platforms and web applications using React and Next.js. We prioritize sub-second page loads, Core Web Vitals, and strict TypeScript logic to ensure performance and SEO indexation.
+            </blockquote>
             <Link to="/contact" className="btn-primary">
               Build a platform <ArrowRight size={16} />
             </Link>
@@ -154,6 +160,86 @@ export function WebDev() {
               <p>We deploy using edge hosting (Vercel, AWS CloudFront) and configure strict CORS policies and environment management to keep your platforms bulletproof.</p>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Comparison Table Section */}
+      <section className="service-page__table-section">
+        <h2>Rendering Architecture Comparison</h2>
+        <div className="service-page__table-wrapper">
+          <table className="service-page__table">
+            <thead>
+              <tr>
+                <th>Rendering Architecture</th>
+                <th>SEO Readiness</th>
+                <th>First Page Paint</th>
+                <th>SaaS Application Suitability</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Jamstack (Static)</td>
+                <td>Excellent</td>
+                <td>Instant (CDN-cached)</td>
+                <td>Best for marketing / landing pages</td>
+              </tr>
+              <tr>
+                <td>SSR (Server-Side)</td>
+                <td>Excellent</td>
+                <td>Fast (Server compiled)</td>
+                <td>Best for interactive dashboards / portals</td>
+              </tr>
+              <tr>
+                <td>SPA (Client-Side)</td>
+                <td>Poor (Delayed JS)</td>
+                <td>Slow (JS bundle dependent)</td>
+                <td>Best for internal-only web tools</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="service-page__faq-section">
+        <h2 className="service-page__faq-heading">Frequently Asked Questions</h2>
+        <div className="service-page__faq-list">
+          {[
+            {
+              q: "Why is site loading speed critical for SaaS?",
+              a: "Customer retention. Users bounce if loading takes longer than 2 seconds. In addition, Core Web Vitals (like LCP and CLS) determine your public domain search ranking."
+            },
+            {
+              q: "Do you use Next.js or Astro?",
+              a: "We use both. Astro is our standard choice for static marketing sites to ensure zero JavaScript bloat, while Next.js is preferred for dynamic dashboards and portals."
+            },
+            {
+              q: "How do you secure SaaS applications?",
+              a: "We configure strict Cross-Origin Resource Sharing (CORS) rules, establish robust environment parameter storage, and deploy security headers across edge CDN hosting."
+            },
+            {
+              q: "Are custom platforms mobile responsive?",
+              a: "Yes. All platforms use custom responsive grid alignments to render pixel-perfect interfaces across all viewing widths, from mobile phones to high-res displays."
+            },
+            {
+              q: "How do you handle database connections?",
+              a: "We integrate modern databases (such as PostgreSQL and Supabase) using secure connection pools and strict backend ORM querying frameworks."
+            }
+          ].map((faq, idx) => (
+            <div 
+              key={idx} 
+              className={`service-faq-item${activeFaq === idx ? ' service-faq-item--active' : ''}`}
+              onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
+            >
+              <div className="service-faq-item__question">
+                <span>{faq.q}</span>
+                <span className="service-faq-item__toggle" />
+              </div>
+              <div className="service-faq-item__answer">
+                <p>{faq.a}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
