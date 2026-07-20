@@ -42,7 +42,7 @@ export function Contact() {
     e.preventDefault();
     setStatus('submitting');
     try {
-      const response = await fetch('https://n8n.amaklabs.com/webhook/contact-form', {
+      const response = await fetch('https://self.n8n.amaklabs.com/webhook/contact-form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

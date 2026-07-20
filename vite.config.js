@@ -7,11 +7,11 @@ export default defineConfig({
   server: {
     proxy: {
       '/webhook-test': {
-        target: 'https://n8n.amaklabs.com',
+        target: 'https://self.n8n.amaklabs.com',
         changeOrigin: true,
       },
       '/webhook': {
-        target: 'https://n8n.amaklabs.com',
+        target: 'https://self.n8n.amaklabs.com',
         changeOrigin: true,
       },
     },
